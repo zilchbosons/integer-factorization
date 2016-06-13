@@ -1,0 +1,2 @@
+#clang++  -Ofast  -o factorize -I./ -I./hiredis -lmpfr -levent -lhiredis -lboost_system -lgmp -lgmpxx factorize.cpp
+g++  factorize.cpp -D__DEBUG -D_DEBUG -ggdb  -o factorize -I./ -lpthread  -lmpfr -lboost_system -lgmp -lgmpxx  -lm
