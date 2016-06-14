@@ -33,11 +33,23 @@ char* identifyZeros(char* num, char* nrev) {
        int be = botl*10 + botr;
        int rce = topr*10 + topl;
        int rbe = botr*10 + botl;
-   
+
        if (_riemannExists(ce) && _riemannExists(be)) { //symmetry
+	       int p1 = _getPosRiemann(ce);
+	       int p2 = _getPosRiemann(be);
+	       const char* exp1 = riemann_exponents[p1 - 1];
+	       const char* exp2 = riemann_exponents[p2 - 1];
        } else if (_riemannExists(ce) && _riemannExists(rbe)) { //cross - symmetry
+	       int p1 = _getPosRiemann(ce);
+	       int p2 = _getPosRiemann(rbe);
        } else if (_riemannExists(rce) && _riemannExists(be)) { //cross - symmetry
+	       int p1 = _getPosRiemann(rce);
+	       int p2 = _getPosRiemann(be);
        } else if (_riemannExists(rce) & _riemannExists(rbe)) { //symmetry
+	       int p1 = _getPosRiemann(rce);
+	       int p2 = _getPosRiemann(rbe);
+	       const char* exp1 = riemann_exponents[p1 - 1];
+	       const char* exp2 = riemann_exponents[p2 - 1];
        } 
      }
 }
