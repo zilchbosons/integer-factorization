@@ -4,19 +4,11 @@
 #include <stdlib.h>
 #include <string>
 #include <math.h>
+#include <common.hpp>
 
 using namespace std;
 
 
-char* reverse_string(char* t) {
-	char* s = strdup(t);
-	for (int i = 0; i < floor(strlen(s) / 2.0); ++i) {
-		char tmp = s[i];
-		s[i] = s[strlen(s) - i - 1];
-		s[strlen(s) - i - 1] = tmp;
-	}
-	return s;
-}
 
 char* rotateLeft(char* n) {
 	int l = strlen(n) ;
