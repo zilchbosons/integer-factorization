@@ -22,6 +22,24 @@ char* rotateLeft(char* n) {
 }
 
 char* identifyZeros(char* num, char* nrev) {
+     int l = strlen(num);
+     for (int i = 0; i < l-1; ++i) { 
+       int topl = num[i];
+       int topr = num[i+1];
+       int botl = nrev[i];
+       int botr = nrev[i+1]; 
+
+       int ce = topl*10 + topr;
+       int be = botl*10 + botr;
+       int rce = topr*10 + topl;
+       int rbe = botr*10 + botl;
+   
+       if (_riemannExists(ce) && _riemannExists(be)) { //symmetry
+       } else if (_riemannExists(ce) && _riemannExists(rbe)) { //cross - symmetry
+       } else if (_riemannExists(rce) && _riemannExists(be)) { //cross - symmetry
+       } else if (_riemannExists(rce) & _riemannExists(rbe)) { //symmetry
+       } 
+     }
 }
 
 char* factorize(char* num) {
