@@ -51,7 +51,7 @@ int countPrimes(char* z1, char* z2) {
 		if (isPrime(e) ) {
 			++cnt;
 		} 
-                if (isPrime(r)) {
+		if (isPrime(r)) {
 			++cnt;
 		}
 	}
@@ -119,9 +119,117 @@ char* identifyZeros(char* num, char* nrev) {
 		} else if (_riemannExists(ce) && _riemannExists(rbe)) { //cross - symmetry
 			int p1 = _getPosRiemann(ce);
 			int p2 = _getPosRiemann(rbe);
+			const char* exp1 = riemann_exponents[p1 - 1];
+			const char* exp2 = riemann_exponents[p2 - 1];
+			char rexp1[14];
+			char rexp2[14];
+			strncpy(rexp1, exp1, 13);
+			strncpy(rexp2, exp2, 13);
+			rexp1[13] = '\0';
+			rexp2[13] = '\0';
+			int lastp1 = rexp1[11] - '0';
+			int lastp2 = rexp2[11] - '0';
+			int firstp1 = rexp1[0] - '0';
+			int firstp2 = rexp2[0] - '0';
+			int rz1 = lastp1*10 + firstp1;
+			int rz2 = lastp2*10 + firstp2;
+			if (ce == rbe) {
+				if (_riemannExists(rz1)) {
+					int p3 = _getPosRiemann(rz1);
+					const char* exp3 = riemann_exponents[p3-1];
+				} else {
+					cout << rz1 << " is not a Riemann Zero\n";
+					exit(1);
+				}
+			} else {
+				if (_riemannExists(rz1)) {
+					int p3 = _getPosRiemann(rz1);
+					const char* exp3 = riemann_exponents[p3-1];
+				} else {
+					cout << rz1 << " is not a Riemann Zero\n";
+					exit(1);
+				}
+				if (_riemannExists(rz2)) {
+					int p4 = _getPosRiemann(rz2);
+					const char* exp4 = riemann_exponents[p4-1];
+				} else {
+					cout << rz2 << " is not a Riemann Zero\n";
+					exit(1);
+				}
+			}   
+			cout << "Before Processing: Truncated exp1:\t"<< rexp1 << "\n";
+			cout << "Before Processing: Truncated exp2:\t"<< rexp2 << "\n";
+			int carry = 0;
+			int corr  = roundOff(rexp1[10]-'0', rexp1[11]-'0', rexp1[12]-'0', carry);
+			rexp1[10] = corr + '0';
+			if (carry > 0) {
+				for (int i = 9; i >= 0; --i) {
+					if (rexp1[i] == '9') { carry = 1; rexp1[i] = '0'; }
+					else {
+						carry = 0;
+						rexp1[i] = carry + rexp1[i] + '0';
+						break;
+					} 
+				}
+			}
+			rexp1[12] =  rexp1[11] = '\0';
+			corr = roundOff(rexp2[10]-'0', rexp2[11]-'0', rexp2[12]-'0', carry);
+			rexp2[10] = corr + '0';
+			if (carry > 0) {
+				for (int i = 9; i >= 0; --i) {
+					if (rexp2[i] == '9') { carry = 1; rexp2[i] = '0'; }
+					else {
+						carry = 0;
+						rexp2[i] = carry + rexp2[i] + '0';
+						break;
+					} 
+				}
+			}
+			rexp2[12] =  rexp2[11] = '\0';
+			cout << "Truncated exp1:\t"<< rexp1 << "\n";
+			cout << "Truncated exp2:\t"<< rexp2 << "\n";
 		} else if (_riemannExists(rce) && _riemannExists(be)) { //cross - symmetry
 			int p1 = _getPosRiemann(rce);
 			int p2 = _getPosRiemann(be);
+			const char* exp1 = riemann_exponents[p1 - 1];
+			const char* exp2 = riemann_exponents[p2 - 1];
+			char rexp1[14];
+			char rexp2[14];
+			strncpy(rexp1, exp1, 13);
+			strncpy(rexp2, exp2, 13);
+			rexp1[13] = '\0';
+			rexp2[13] = '\0';
+			cout << "Before Processing: Truncated exp1:\t"<< rexp1 << "\n";
+			cout << "Before Processing: Truncated exp2:\t"<< rexp2 << "\n";
+			int carry = 0;
+			int corr = roundOff(rexp1[10]-'0', rexp1[11]-'0', rexp1[12]-'0', carry);
+			rexp1[10] = corr + '0';
+			if (carry > 0) {
+				for (int i = 9; i >= 0; --i) {
+					if (rexp1[i] == '9') { carry = 1; rexp1[i] = '0'; }
+					else {
+						carry = 0;
+						rexp1[i] = carry + rexp1[i] + '0';
+						break;
+					} 
+				}
+			}
+			rexp1[12] =  rexp1[11] = '\0';
+			corr = roundOff(rexp2[10]-'0', rexp2[11]-'0', rexp2[12]-'0', carry);
+			rexp2[10] = corr + '0';
+			if (carry > 0) {
+				for (int i = 9; i >= 0; --i) {
+					if (rexp2[i] == '9') { carry = 1; rexp2[i] = '0'; }
+					else {
+						carry = 0;
+						rexp2[i] = carry + rexp2[i] + '0';
+						break;
+					} 
+				}
+			}
+			rexp2[12] =  rexp2[11] = '\0';
+			cout << "Truncated exp1:\t"<< rexp1 << "\n";
+			cout << "Truncated exp2:\t"<< rexp2 << "\n";
 		} else if (_riemannExists(rce) & _riemannExists(rbe)) { //symmetry
 			int p1 = _getPosRiemann(rce);
 			int p2 = _getPosRiemann(rbe);
@@ -136,25 +244,27 @@ char* identifyZeros(char* num, char* nrev) {
 			cout << "Before Processing: Truncated exp1:\t"<< rexp1 << "\n";
 			cout << "Before Processing: Truncated exp2:\t"<< rexp2 << "\n";
 			int carry = 0;
-			rexp1[10] = roundOff(rexp1[10]-'0', rexp1[11]-'0', rexp1[12]-'0', carry);
+			int corr =  roundOff(rexp1[10]-'0', rexp1[11]-'0', rexp1[12]-'0', carry);
+			rexp1[10] = corr + '0';
 			if (carry > 0) {
 				for (int i = 9; i >= 0; --i) {
-					if (rexp1[i] == 9) { carry = 1; rexp1[i] = 0; }
+					if (rexp1[i] == '9') { carry = 1; rexp1[i] = '0'; }
 					else {
 						carry = 0;
-						rexp1[i] = carry + rexp1[i];
+						rexp1[i] = carry + rexp1[i] + '0';
 						break;
 					} 
 				}
 			}
 			rexp1[12] =  rexp1[11] = '\0';
-			rexp2[10] = roundOff(rexp2[10]-'0', rexp2[11]-'0', rexp2[12]-'0', carry);
+			corr  = roundOff(rexp2[10]-'0', rexp2[11]-'0', rexp2[12]-'0', carry);
+			rexp2[10] = corr + '0';
 			if (carry > 0) {
 				for (int i = 9; i >= 0; --i) {
-					if (rexp2[i] == 9) { carry = 1; rexp2[i] = 0; }
+					if (rexp2[i] == '9') { carry = 1; rexp2[i] = '0'; }
 					else {
 						carry = 0;
-						rexp2[i] = carry + rexp2[i];
+						rexp2[i] = carry + rexp2[i] + '0';
 						break;
 					} 
 				}
