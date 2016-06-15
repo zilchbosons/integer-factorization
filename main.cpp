@@ -39,12 +39,12 @@ char* identifyZeros(char* num, char* nrev) {
 	       int p2 = _getPosRiemann(be);
 	       const char* exp1 = riemann_exponents[p1 - 1];
 	       const char* exp2 = riemann_exponents[p2 - 1];
-               char rexp1[13];
-               char rexp2[13];
-               strncpy(rexp1, exp1, 12);
-               strncpy(rexp2, exp2, 12);
-               rexp1[12] = '\0';
-               rexp2[12] = '\0';
+               char rexp1[14];
+               char rexp2[14];
+               strncpy(rexp1, exp1, 13);
+               strncpy(rexp2, exp2, 13);
+               rexp1[13] = '\0';
+               rexp2[13] = '\0';
                cout << "Truncated exp1:\t"<< rexp1 << "\n";
                cout << "Truncated exp2:\t"<< rexp2 << "\n";
        } else if (_riemannExists(ce) && _riemannExists(rbe)) { //cross - symmetry
@@ -58,12 +58,12 @@ char* identifyZeros(char* num, char* nrev) {
 	       int p2 = _getPosRiemann(rbe);
 	       const char* exp1 = riemann_exponents[p1 - 1];
 	       const char* exp2 = riemann_exponents[p2 - 1];
-               char rexp1[13];
-               char rexp2[13];
-               strncpy(rexp1, exp1, 12);
-               strncpy(rexp2, exp2, 12);
-               rexp1[12] = '\0';
-               rexp2[12] = '\0';
+               char rexp1[14];
+               char rexp2[14];
+               strncpy(rexp1, exp1, 13);
+               strncpy(rexp2, exp2, 13);
+               rexp1[13] = '\0';
+               rexp2[13] = '\0';
                cout << "Truncated exp1:\t"<< rexp1 << "\n";
                cout << "Truncated exp2:\t"<< rexp2 << "\n";
        } 
