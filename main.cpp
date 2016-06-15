@@ -5,7 +5,9 @@
 #include <string>
 #include <math.h>
 #include <common.hpp>
+#include <boost/lexical_cast.hpp>
 
+using namespace boost;
 using namespace std;
 
 
@@ -38,8 +40,27 @@ int roundOff(int x, int y, int z, int& c) {
 	return x;
 }
 
+int countPrimes(char* z1, char* z2) {
+	int offset = 2;
+	int cnt = 0;
+	for (int i =  offset; i < 11; ++i) {
+		int z1k = z1[i] - '0';
+		int z2k = z2[i] - '0';
+		int e = z1k*10 + z2k;
+		int r = z2k*10 + z1k;
+		if (isPrime(e) ) {
+			++cnt;
+		} 
+                if (isPrime(r)) {
+			++cnt;
+		}
+	}
+	return cnt;
+}
+
 char* identifyZeros(char* num, char* nrev) {
 	int l = strlen(num);
+	std::string factor = "";
 	for (int i = 0; i < l-1; ++i) { 
 		int topl = num[i]-'0';
 		int topr = num[i+1]-'0';
@@ -94,6 +115,7 @@ char* identifyZeros(char* num, char* nrev) {
 			rexp2[12] = rexp2[11] =  '\0';
 			cout << "Truncated exp1:\t"<< rexp1 << "\n";
 			cout << "Truncated exp2:\t"<< rexp2 << "\n";
+			factor += boost::lexical_cast<std::string>(countPrimes(rexp1, rexp2));
 		} else if (_riemannExists(ce) && _riemannExists(rbe)) { //cross - symmetry
 			int p1 = _getPosRiemann(ce);
 			int p2 = _getPosRiemann(rbe);
@@ -140,8 +162,10 @@ char* identifyZeros(char* num, char* nrev) {
 			rexp2[12] =  rexp2[11] = '\0';
 			cout << "Truncated exp1:\t"<< rexp1 << "\n";
 			cout << "Truncated exp2:\t"<< rexp2 << "\n";
+			factor += boost::lexical_cast<std::string>(countPrimes(rexp1, rexp2));
 		} 
 	}
+	return strdup((char*) factor.c_str());
 }
 
 char* factorize(char* num) {
@@ -155,7 +179,7 @@ char* factorize(char* num) {
 		cout << nrev <<"\n";
 		rotateLeft(nrev);
 	}
-	return 0;
+	return strdup((char*) factor.c_str());
 }
 
 int main() {
@@ -169,4 +193,7 @@ int main() {
 	char* num = strdup((char*) numStr.c_str());
 	cout <<"Number Read was: \t"<<num<<"\n";
 	char* factor = factorize(num);
+	if (factor) {
+		cout << "\nFactor:\t"<< factor<<"\n";
+	}
 }
