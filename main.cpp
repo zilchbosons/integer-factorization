@@ -24,10 +24,10 @@ char* rotateLeft(char* n) {
 char* identifyZeros(char* num, char* nrev) {
      int l = strlen(num);
      for (int i = 0; i < l-1; ++i) { 
-       int topl = num[i];
-       int topr = num[i+1];
-       int botl = nrev[i];
-       int botr = nrev[i+1]; 
+       int topl = num[i]-'0';
+       int topr = num[i+1]-'0';
+       int botl = nrev[i]-'0';
+       int botr = nrev[i+1]-'0'; 
 
        int ce = topl*10 + topr;
        int be = botl*10 + botr;
@@ -39,6 +39,14 @@ char* identifyZeros(char* num, char* nrev) {
 	       int p2 = _getPosRiemann(be);
 	       const char* exp1 = riemann_exponents[p1 - 1];
 	       const char* exp2 = riemann_exponents[p2 - 1];
+               char rexp1[13];
+               char rexp2[13];
+               strncpy(rexp1, exp1, 12);
+               strncpy(rexp2, exp2, 12);
+               rexp1[12] = '\0';
+               rexp2[12] = '\0';
+               cout << "Truncated exp1:\t"<< rexp1 << "\n";
+               cout << "Truncated exp2:\t"<< rexp2 << "\n";
        } else if (_riemannExists(ce) && _riemannExists(rbe)) { //cross - symmetry
 	       int p1 = _getPosRiemann(ce);
 	       int p2 = _getPosRiemann(rbe);
@@ -50,6 +58,14 @@ char* identifyZeros(char* num, char* nrev) {
 	       int p2 = _getPosRiemann(rbe);
 	       const char* exp1 = riemann_exponents[p1 - 1];
 	       const char* exp2 = riemann_exponents[p2 - 1];
+               char rexp1[13];
+               char rexp2[13];
+               strncpy(rexp1, exp1, 12);
+               strncpy(rexp2, exp2, 12);
+               rexp1[12] = '\0';
+               rexp2[12] = '\0';
+               cout << "Truncated exp1:\t"<< rexp1 << "\n";
+               cout << "Truncated exp2:\t"<< rexp2 << "\n";
        } 
      }
 }
