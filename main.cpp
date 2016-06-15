@@ -40,6 +40,43 @@ int roundOff(int x, int y, int z, int& c) {
 	return x;
 }
 
+int countPrimes(char* z1, char* z2, char* z3, char* z4) {
+	int offset = 2;
+	int cnt = 0;
+	for (int i =  offset; i < 11; ++i) {
+		int z1k = z1[i] - '0';
+		int z2k = z2[i] - '0';
+
+		int e = z1k*10 + z2k;
+		int r = z2k*10 + z1k;
+		if (isPrime(e) ) {
+			++cnt;
+		} 
+		if (isPrime(r)) {
+			++cnt;
+		}
+	}
+	return cnt;
+}
+
+int countPrimes(char* z1, char* z2, char* z3) {
+	int offset = 2;
+	int cnt = 0;
+	for (int i =  offset; i < 11; ++i) {
+		int z1k = z1[i] - '0';
+		int z2k = z2[i] - '0';
+		int e = z1k*10 + z2k;
+		int r = z2k*10 + z1k;
+		if (isPrime(e) ) {
+			++cnt;
+		} 
+		if (isPrime(r)) {
+			++cnt;
+		}
+	}
+	return cnt;
+}
+
 int countPrimes(char* z1, char* z2) {
 	int offset = 2;
 	int cnt = 0;
@@ -242,6 +279,7 @@ char* identifyZeros(char* num, char* nrev) {
 					cout << "Truncated exp1:\t"<< rexp1 << "\n";
 					cout << "Truncated exp2:\t"<< rexp2 << "\n";
 				}
+				factor += boost::lexical_cast<std::string>(countPrimes(rexp1, rexp2, rexp3, rexp4));
 				cout << "Before Processing: Truncated exp1:\t"<< rexp1 << "\n";
 				cout << "Before Processing: Truncated exp2:\t"<< rexp2 << "\n";
 				cout << "Before Processing: Truncated exp3:\t"<< rexp3 << "\n";
@@ -374,6 +412,7 @@ char* identifyZeros(char* num, char* nrev) {
 					cout << "Truncated exp1:\t"<< rexp1 << "\n";
 					cout << "Truncated exp2:\t"<< rexp2 << "\n";
 				}
+				factor += boost::lexical_cast<std::string>(countPrimes(rexp1, rexp2, rexp3, rexp4));
 				cout << "Before Processing: Truncated exp1:\t"<< rexp1 << "\n";
 				cout << "Before Processing: Truncated exp2:\t"<< rexp2 << "\n";
 				cout << "Before Processing: Truncated exp3:\t"<< rexp3 << "\n";
