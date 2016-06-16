@@ -40,12 +40,70 @@ int roundOff(int x, int y, int z, int& c) {
 	return x;
 }
 
+int countPrimes(char* z1, char* z2, char* z3, char* z4);
 int countPrimes(char* z1, char* z2, char* z3);
 int countPrimes(char* z1, char* z2);
 
 
 int countPrimes(char* z1, char* z2, char* z3, char* _z3, char* z4, char* _z4) {
+	cout <<"\nHitting 6 way primes\n";
+	if (strcmp(z1, z2)==0) {
+		return countPrimes(z1, z3, _z3);
+	}
+	if (strcmp(z3, z4) == 0) {
+		return countPrimes(z1, z2, z3, _z3);
+	}
 
+	int offset = 2;
+	int cnt = 0, lcnt = 0;
+	for (int i =  offset; i < 11; ++i) {
+		int z1k = z1[i] - '0';
+		int z2k = z2[i] - '0';
+		int z3k = z3[i] - '0';
+		int z4k = z4[i] - '0';
+
+		int e = z1k*10 + z2k;
+		int r = z2k*10 + z1k;
+
+		bool prime1 = isPrime(e) || isPrime(r);
+		lcnt += (isPrime(e)==true)? 1:0;
+		lcnt += (isPrime(r)==true)? 1:0;
+
+		int e2 = z2k*10 + z3k;
+		int r2 = z3k*10 + z2k;
+		bool prime2 = isPrime(e2) || isPrime(r2);
+		lcnt += (isPrime(e2)==true)? 1:0;
+		lcnt += (isPrime(r2)==true)? 1:0;
+
+		int e3 = z3k*10 + z4k;
+		int r3 = z4k*10 + z3k;
+		bool prime3 = isPrime(e3)  || isPrime(r3);
+		lcnt += (isPrime(e3)==true)? 1:0;
+		lcnt += (isPrime(r3)==true)? 1:0;
+
+		int e4 = z1k*10 + z4k;
+		int r4 = z4k*10 + z3k;
+		bool prime4 = isPrime(e4) || isPrime(r4);
+		lcnt += (isPrime(e4)==true)? 1:0;
+		lcnt += (isPrime(r4)==true)? 1:0;
+
+		int e5 = z1k*10 + z3k;
+		int r5 = z3k*10 + z1k;
+		bool prime5 = isPrime(e5) || isPrime(r5);
+		lcnt += (isPrime(e5)==true)? 1:0;
+		lcnt += (isPrime(r5)==true)? 1:0;
+
+		int e6 = z2k*10 + z4k;
+		int r6 = z4k*10 + z2k;
+		bool prime6 = isPrime(e6) || isPrime(r6);
+		lcnt += (isPrime(e6)==true)? 1:0;
+		lcnt += (isPrime(r6)==true)? 1:0;
+		//4C2 = 6
+		if (prime1 && prime2 && prime3 && prime4 && prime5 && prime6) {
+			cnt += lcnt;
+		}
+	}
+	return cnt;
 }
 
 int countPrimes(char* z1, char* z2, char* z3, char* z4) {
