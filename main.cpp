@@ -43,6 +43,11 @@ int roundOff(int x, int y, int z, int& c) {
 int countPrimes(char* z1, char* z2, char* z3);
 int countPrimes(char* z1, char* z2);
 
+
+int countPrimes(char* z1, char* z2, char* z3, char* _z3, char* z4, char* _z4) {
+
+}
+
 int countPrimes(char* z1, char* z2, char* z3, char* z4) {
 	cout <<"\nHitting 4 way primes\n";
 	if (strcmp(z1, z2)==0) {
@@ -248,7 +253,7 @@ char* identifyZeros(char* num, char* nrev) {
 			char _rexp4[14];
 			char rexp3[14];
 			char rexp4[14];
-			rexp4[13] = '\0';
+			rexp3[0] = _rexp3[0]= _rexp4[0] = rexp4[0] = '\0';
 			if (ce == rbe) {
 				if (_riemannExists(rz1)) {
 					int p3 = _getPosRiemann(rz1);
@@ -426,7 +431,7 @@ char* identifyZeros(char* num, char* nrev) {
 				cout << "Truncated exp1:\t"<< rexp1 << "\n";
 				cout << "Truncated exp2:\t"<< rexp2 << "\n";
 			}
-			factor += boost::lexical_cast<std::string>(countPrimes(rexp1, rexp2, rexp3, rexp4));
+			factor += boost::lexical_cast<std::string>(countPrimes(rexp1, rexp2, rexp3, _rexp3, rexp4, _rexp4));
 			cout << "Before Processing: Truncated exp1:\t"<< rexp1 << "\n";
 			cout << "Before Processing: Truncated exp2:\t"<< rexp2 << "\n";
 			cout << "Before Processing: Truncated exp3:\t"<< _rexp3 << "\n";
@@ -456,7 +461,7 @@ char* identifyZeros(char* num, char* nrev) {
 			char _rexp4[14];
 			char rexp3[14];
 			char rexp4[14];
-			rexp4[13] = '\0';
+			rexp3[0] = _rexp3[0]= _rexp4[0] = rexp4[0] = '\0';
 			int carry = 0;
 			int corr = roundOff(rexp1[10]-'0', rexp1[11]-'0', rexp1[12]-'0', carry);
 			rexp1[10] = corr + '0';
@@ -662,7 +667,7 @@ char* identifyZeros(char* num, char* nrev) {
 				cout << "Truncated exp1:\t"<< rexp1 << "\n";
 				cout << "Truncated exp2:\t"<< rexp2 << "\n";
 			}
-			factor += boost::lexical_cast<std::string>(countPrimes(rexp1, rexp2, rexp3, rexp4));
+			factor += boost::lexical_cast<std::string>(countPrimes(rexp1, rexp2, rexp3, _rexp3, rexp4, _rexp4));
 			cout << "Before Processing: Truncated exp1:\t"<< rexp1 << "\n";
 			cout << "Before Processing: Truncated exp2:\t"<< rexp2 << "\n";
 			cout << "Before Processing: Truncated exp3:\t"<< _rexp3 << "\n";
