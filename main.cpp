@@ -46,6 +46,9 @@ int countPrimes(char* z1, char* z2) {
 int countPrimes(char* z1, char* z2, char* z3, char* z4) {
 }
 
+int countPrimes(char* z1, char* z2, char* z3, char* z4, char* z5, char* z6) {
+}
+
 char* identifyZeros(char* num, char* nrev) {
 	int l = strlen(num);
 	std::string factor = "";
@@ -71,8 +74,8 @@ char* identifyZeros(char* num, char* nrev) {
 			strncpy(rexp2, exp2, 13);
 			rexp1[13] = '\0';
 			rexp2[13] = '\0';
-			cout << "Before Processing: Truncated exp1:\t"<< rexp1 << "\n";
-			cout << "Before Processing: Truncated exp2:\t"<< rexp2 << "\n";
+			//cout << "Before Processing: Truncated exp1:\t"<< rexp1 << "\n";
+			//cout << "Before Processing: Truncated exp2:\t"<< rexp2 << "\n";
 			int carry = 0;
 			int corr = roundOff(rexp1[10]-'0', rexp1[11]-'0', rexp1[12]-'0', carry);
 			rexp1[10] = corr + '0';
@@ -135,7 +138,7 @@ char* identifyZeros(char* num, char* nrev) {
 					const char* exp3 = riemann_exponents[p3-1];
 					strncpy(rexp3, exp3, 13);
 					rexp3[13] = '\0';
-					cout << "Before Processing: Truncated exp1:\t"<< rexp3 << "\n";
+					//cout << "Before Processing: Truncated exp1:\t"<< rexp3 << "\n";
 
 					int carry = 0;
 					int corr  = roundOff(rexp3[10]-'0', rexp3[11]-'0', rexp3[12]-'0', carry);
@@ -159,7 +162,7 @@ char* identifyZeros(char* num, char* nrev) {
 					const char* exp3 = riemann_exponents[p3-1];
 					strncpy(_rexp3, exp3, 13);
 					rexp3[13] = '\0';
-					cout << "Before Processing: Truncated exp1:\t"<< _rexp3 << "\n";
+					//cout << "Before Processing: Truncated exp1:\t"<< _rexp3 << "\n";
 
 					int carry = 0;
 					int corr  = roundOff(_rexp3[10]-'0', _rexp3[11]-'0', _rexp3[12]-'0', carry);
@@ -184,7 +187,7 @@ char* identifyZeros(char* num, char* nrev) {
 					const char* exp3 = riemann_exponents[p3-1];
 					strncpy(rexp3, exp3, 13);
 					rexp3[13] = '\0';
-					cout << "Before Processing: Truncated exp1:\t"<< rexp3 << "\n";
+					//cout << "Before Processing: Truncated exp1:\t"<< rexp3 << "\n";
 
 					int carry = 0;
 					int corr  = roundOff(rexp3[10]-'0', rexp3[11]-'0', rexp3[12]-'0', carry);
@@ -208,7 +211,7 @@ char* identifyZeros(char* num, char* nrev) {
 					const char* exp3 = riemann_exponents[p3-1];
 					strncpy(_rexp3, exp3, 13);
 					rexp3[13] = '\0';
-					cout << "Before Processing: Truncated exp1:\t"<< _rexp3 << "\n";
+					//cout << "Before Processing: Truncated exp1:\t"<< _rexp3 << "\n";
 
 					int carry = 0;
 					int corr  = roundOff(_rexp3[10]-'0', _rexp3[11]-'0', _rexp3[12]-'0', carry);
@@ -232,7 +235,7 @@ char* identifyZeros(char* num, char* nrev) {
 					const char* exp4 = riemann_exponents[p4-1];
 					strncpy(rexp4, exp4, 13);
 					rexp4[13] = '\0';
-					cout << "Before Processing: Truncated exp4:\t"<< rexp4 << "\n";
+					//cout << "Before Processing: Truncated exp4:\t"<< rexp4 << "\n";
 
 					int carry = 0;
 					int corr  = roundOff(rexp4[10]-'0', rexp4[11]-'0', rexp4[12]-'0', carry);
@@ -256,7 +259,7 @@ char* identifyZeros(char* num, char* nrev) {
 					const char* exp4 = riemann_exponents[p4-1];
 					strncpy(_rexp4, exp4, 13);
 					_rexp4[13] = '\0';
-					cout << "Before Processing: Truncated exp4:\t"<< _rexp4 << "\n";
+					//cout << "Before Processing: Truncated exp4:\t"<< _rexp4 << "\n";
 
 					int carry = 0;
 					int corr  = roundOff(_rexp4[10]-'0', _rexp4[11]-'0', _rexp4[12]-'0', carry);
@@ -306,12 +309,13 @@ char* identifyZeros(char* num, char* nrev) {
 				cout << "Truncated exp2:\t"<< rexp2 << "\n";
 			}
 			factor += boost::lexical_cast<std::string>(countPrimes(rexp1, rexp2, rexp3, _rexp3, rexp4, _rexp4));
-			cout << "Before Processing: Truncated exp1:\t"<< rexp1 << "\n";
-			cout << "Before Processing: Truncated exp2:\t"<< rexp2 << "\n";
-			cout << "Before Processing: Truncated exp3:\t"<< _rexp3 << "\n";
-			cout << "Before Processing: Truncated exp4:\t"<< _rexp4 << "\n";
-			cout << "Before Processing: Truncated exp3:\t"<< rexp3 << "\n";
-			cout << "Before Processing: Truncated exp4:\t"<< rexp4 << "\n";
+			/*cout << "Before Processing: Truncated exp1:\t"<< rexp1 << "\n";
+			  cout << "Before Processing: Truncated exp2:\t"<< rexp2 << "\n";
+			  cout << "Before Processing: Truncated exp3:\t"<< _rexp3 << "\n";
+			  cout << "Before Processing: Truncated exp4:\t"<< _rexp4 << "\n";
+			  cout << "Before Processing: Truncated exp3:\t"<< rexp3 << "\n";
+			  cout << "Before Processing: Truncated exp4:\t"<< rexp4 << "\n";
+			 */
 		} else if (_riemannExists(rce) && _riemannExists(be)) { //cross - symmetry
 			int p1 = _getPosRiemann(rce);
 			int p2 = _getPosRiemann(be);
@@ -369,7 +373,7 @@ char* identifyZeros(char* num, char* nrev) {
 					const char* exp3 = riemann_exponents[p3-1];
 					strncpy(rexp3, exp3, 13);
 					rexp3[13] = '\0';
-					cout << "Before Processing: Truncated exp1:\t"<< rexp3 << "\n";
+					//cout << "Before Processing: Truncated exp1:\t"<< rexp3 << "\n";
 
 					int carry = 0;
 					int corr  = roundOff(rexp3[10]-'0', rexp3[11]-'0', rexp3[12]-'0', carry);
@@ -393,7 +397,7 @@ char* identifyZeros(char* num, char* nrev) {
 					const char* exp3 = riemann_exponents[p3-1];
 					strncpy(_rexp3, exp3, 13);
 					rexp3[13] = '\0';
-					cout << "Before Processing: Truncated exp1:\t"<< _rexp3 << "\n";
+					//cout << "Before Processing: Truncated exp1:\t"<< _rexp3 << "\n";
 
 					int carry = 0;
 					int corr  = roundOff(_rexp3[10]-'0', _rexp3[11]-'0', _rexp3[12]-'0', carry);
@@ -418,7 +422,7 @@ char* identifyZeros(char* num, char* nrev) {
 					const char* exp3 = riemann_exponents[p3-1];
 					strncpy(rexp3, exp3, 13);
 					rexp3[13] = '\0';
-					cout << "Before Processing: Truncated exp1:\t"<< rexp3 << "\n";
+					//cout << "Before Processing: Truncated exp1:\t"<< rexp3 << "\n";
 
 					int carry = 0;
 					int corr  = roundOff(rexp3[10]-'0', rexp3[11]-'0', rexp3[12]-'0', carry);
@@ -442,7 +446,7 @@ char* identifyZeros(char* num, char* nrev) {
 					const char* exp3 = riemann_exponents[p3-1];
 					strncpy(_rexp3, exp3, 13);
 					rexp3[13] = '\0';
-					cout << "Before Processing: Truncated exp1:\t"<< _rexp3 << "\n";
+					//cout << "Before Processing: Truncated exp1:\t"<< _rexp3 << "\n";
 
 					int carry = 0;
 					int corr  = roundOff(_rexp3[10]-'0', _rexp3[11]-'0', _rexp3[12]-'0', carry);
@@ -466,7 +470,7 @@ char* identifyZeros(char* num, char* nrev) {
 					const char* exp4 = riemann_exponents[p4-1];
 					strncpy(rexp4, exp4, 13);
 					rexp4[13] = '\0';
-					cout << "Before Processing: Truncated exp4:\t"<< rexp4 << "\n";
+					//cout << "Before Processing: Truncated exp4:\t"<< rexp4 << "\n";
 
 					int carry = 0;
 					int corr  = roundOff(rexp4[10]-'0', rexp4[11]-'0', rexp4[12]-'0', carry);
@@ -490,7 +494,7 @@ char* identifyZeros(char* num, char* nrev) {
 					const char* exp4 = riemann_exponents[p4-1];
 					strncpy(_rexp4, exp4, 13);
 					_rexp4[13] = '\0';
-					cout << "Before Processing: Truncated exp4:\t"<< _rexp4 << "\n";
+					//cout << "Before Processing: Truncated exp4:\t"<< _rexp4 << "\n";
 
 					int carry = 0;
 					int corr  = roundOff(_rexp4[10]-'0', _rexp4[11]-'0', _rexp4[12]-'0', carry);
@@ -540,12 +544,13 @@ char* identifyZeros(char* num, char* nrev) {
 				cout << "Truncated exp2:\t"<< rexp2 << "\n";
 			}
 			factor += boost::lexical_cast<std::string>(countPrimes(rexp1, rexp2, rexp3, _rexp3, rexp4, _rexp4));
-			cout << "Before Processing: Truncated exp1:\t"<< rexp1 << "\n";
-			cout << "Before Processing: Truncated exp2:\t"<< rexp2 << "\n";
-			cout << "Before Processing: Truncated exp3:\t"<< _rexp3 << "\n";
-			cout << "Before Processing: Truncated exp4:\t"<< _rexp4 << "\n";
-			cout << "Before Processing: Truncated exp3:\t"<< rexp3 << "\n";
-			cout << "Before Processing: Truncated exp4:\t"<< rexp4 << "\n";
+			/*cout << "Before Processing: Truncated exp1:\t"<< rexp1 << "\n";
+			  cout << "Before Processing: Truncated exp2:\t"<< rexp2 << "\n";
+			  cout << "Before Processing: Truncated exp3:\t"<< _rexp3 << "\n";
+			  cout << "Before Processing: Truncated exp4:\t"<< _rexp4 << "\n";
+			  cout << "Before Processing: Truncated exp3:\t"<< rexp3 << "\n";
+			  cout << "Before Processing: Truncated exp4:\t"<< rexp4 << "\n";
+			 */
 			rexp3[12] =  rexp3[11] = '\0';
 		} else if (_riemannExists(rce) & _riemannExists(rbe)) { //symmetry
 			int p1 = _getPosRiemann(rce);
@@ -558,8 +563,8 @@ char* identifyZeros(char* num, char* nrev) {
 			strncpy(rexp2, exp2, 13);
 			rexp1[13] = '\0';
 			rexp2[13] = '\0';
-			cout << "Before Processing: Truncated exp1:\t"<< rexp1 << "\n";
-			cout << "Before Processing: Truncated exp2:\t"<< rexp2 << "\n";
+			//cout << "Before Processing: Truncated exp1:\t"<< rexp1 << "\n";
+			//cout << "Before Processing: Truncated exp2:\t"<< rexp2 << "\n";
 			int carry = 0;
 			int corr =  roundOff(rexp1[10]-'0', rexp1[11]-'0', rexp1[12]-'0', carry);
 			rexp1[10] = corr + '0';
@@ -587,8 +592,8 @@ char* identifyZeros(char* num, char* nrev) {
 				}
 			}
 			rexp2[12] =  rexp2[11] = '\0';
-			cout << "Before Processing: Truncated exp1:\t"<< rexp1 << "\n";
-			cout << "Before Processing: Truncated exp2:\t"<< rexp2 << "\n";
+			//cout << "Before Processing: Truncated exp1:\t"<< rexp1 << "\n";
+			//cout << "Before Processing: Truncated exp2:\t"<< rexp2 << "\n";
 			factor += boost::lexical_cast<std::string>(countPrimes(rexp1, rexp2));
 		} 
 	}
