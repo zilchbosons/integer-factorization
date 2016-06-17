@@ -5,6 +5,7 @@
 #include <string>
 #include <math.h>
 #include <common.hpp>
+#include <vector>
 #include <boost/lexical_cast.hpp>
 
 using namespace boost;
@@ -41,9 +42,38 @@ int roundOff(int x, int y, int z, int& c) {
 }
 
 int countPrimes(char* z1, char* z2) {
+	int l = strlen(z1);
+	int cnt = 0;
+	for (int i = 0; i < l ; ++i ) {
+		int z1k = z1[i] - '0';
+		int z2k = z2[i] - '0';
+
+		int ce = z1k*10 + z2k;
+		int rce = z2k*10 + z1k;
+
+		if (isPrime(ce) || isPrime(rce) ) {
+			++cnt;
+		} 
+	}
+	cout << "\n 2-way Primes: \t"<<cnt<<"\n";
+	return 0;
 }
 
 int countPrimes(char* z1, char* z2, char* z3, char* z4) {
+	vector<char*> test;
+	test.push_back(z1);
+	test.push_back(z2);
+	test.push_back(z3);
+	test.push_back(z4);
+	int l = strlen(z1);
+	std::sort(test.begin(), test.end());
+	int cnt = 0, lcnt = 0;
+	for (int i = 0; i < l; ++i ) {
+
+		std::rotate(test.begin(), test.begin()+1, test.end());
+	} 
+	cout << "\n 4-way Primes: \t"<<cnt<<"\n";
+	return 0;
 }
 
 int countPrimes(char* z1, char* z2, char* z3, char* z4, char* z5, char* z6) {
