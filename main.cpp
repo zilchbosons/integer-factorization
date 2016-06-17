@@ -60,7 +60,9 @@ int countPrimes(char* z1, char* z2, char* z3, char* _z3, char* z4, char* _z4) {
 		int z1k = z1[i] - '0';
 		int z2k = z2[i] - '0';
 		int z3k = z3[i] - '0';
+		int _z3k = _z3[i] - '0';
 		int z4k = z4[i] - '0';
+		int _z4k = _z4[i] - '0';
 
 		int e = z1k*10 + z2k;
 		int r = z2k*10 + z1k;
@@ -98,8 +100,66 @@ int countPrimes(char* z1, char* z2, char* z3, char* _z3, char* z4, char* _z4) {
 		bool prime6 = isPrime(e6) || isPrime(r6);
 		lcnt += (isPrime(e6)==true)? 1:0;
 		lcnt += (isPrime(r6)==true)? 1:0;
-		//4C2 = 6
-		if (prime1 && prime2 && prime3 && prime4 && prime5 && prime6) {
+
+		int e7 = z1k*10 + _z3k;
+		int r7 = _z3k*10 + z1k;
+		bool prime7 = isPrime(e7) || isPrime(r7);
+		lcnt += (isPrime(e7)==true)? 1:0;
+		lcnt += (isPrime(r7)==true)? 1:0;
+
+		int e8 = z2k*10 + _z3k;
+		int r8 = _z3k*10 + z2k;
+		bool prime8 = isPrime(e8) || isPrime(r8);
+		lcnt += (isPrime(e8)==true)? 1:0;
+		lcnt += (isPrime(r8)==true)? 1:0;
+
+		int e9 = z3k*10 + _z3k;
+		int r9 = _z3k*10 + z3k;
+		bool prime9 = isPrime(e9) || isPrime(r9);
+		lcnt += (isPrime(e9)==true)? 1:0;
+		lcnt += (isPrime(r9)==true)? 1:0;
+
+		int e10 = z4k*10 + _z3k;
+		int r10 = _z3k*10 + z4k;
+		bool prime10 = isPrime(e10) || isPrime(r10);
+		lcnt += (isprime(e10)==true)? 1:0;
+		lcnt += (isprime(r10)==true)? 1:0;
+
+
+		int e11 = _z3k*10 + _z4k;
+		int r11 = _z4k*10 + _z3k;
+		bool prime11 = isPrime(e11) || isPrime(r11);
+		lcnt += (isprime(e11)==true)? 1:0;
+		lcnt += (isprime(r11)==true)? 1:0;
+
+
+
+		int e12 = z1k*10 + _z4k
+			int r12 = _z4k*10 + z1k;
+		bool prime12 = isPrime(e12) || isPrime(r12);
+		lcnt += (isprime(e12)==true)? 1:0;
+		lcnt += (isprime(r12)==true)? 1:0;
+
+		int e13 = z2k*10 + _z4k;
+		int r13 = _z4k*10 + z2k;
+		bool prime13 = isPrime(e13) || isPrime(r13);
+		lcnt += (isprime(e13)==true)? 1:0;
+		lcnt += (isprime(r13)==true)? 1:0;
+
+		int e14 = z3k*10 + _z4k;
+		int r14 = _z4k*10 + z3k;
+		bool prime14 = isPrime(e14) || isPrime(r14);
+		lcnt += (isprime(e14)==true)? 1:0;
+		lcnt += (isprime(r14)==true)? 1:0;
+
+		int e15 = z4k*10 + _z4k;
+		int r15 = _z4k*10 + z4k;
+		bool prime15 = isPrime(e15) || isPrime(r14);
+		lcnt += (isprime(e15)==true)? 1:0;
+		lcnt += (isprime(r15)==true)? 1:0;
+
+		//6C2 = 15
+		if (prime1 && prime2 && prime3 && prime4 && prime5 && prime6 && prime7 && prime8 && prime9 && prime10 && prime11 && prime12 && prime13 && prime14 && prime15) {
 			cnt += lcnt;
 		}
 	}
