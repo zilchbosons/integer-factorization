@@ -121,8 +121,8 @@ char* identifyZeros(char* num, char* nrev) {
 			strncpy(rexp2, exp2, 13);
 			rexp1[13] = '\0';
 			rexp2[13] = '\0';
-			int lastp1 = rexp1[11] - '0';
-			int lastp2 = rexp2[11] - '0';
+			int lastp1 = rexp1[10] - '0';
+			int lastp2 = rexp2[10] - '0';
 			int firstp1 = rexp1[0] - '0';
 			int firstp2 = rexp2[0] - '0';
 			int rz1 = lastp1*10 + firstp1;
@@ -331,8 +331,8 @@ char* identifyZeros(char* num, char* nrev) {
 			strncpy(rexp2, exp2, 13);
 			rexp1[13] = '\0';
 			rexp2[13] = '\0';
-			int lastp1 = rexp1[11] - '0';
-			int lastp2 = rexp2[11] - '0';
+			int lastp1 = rexp1[10] - '0';
+			int lastp2 = rexp2[10] - '0';
 			int firstp1 = rexp1[0] - '0';
 			int firstp2 = rexp2[0] - '0';
 			int rz1 = lastp1*10 + firstp1;
