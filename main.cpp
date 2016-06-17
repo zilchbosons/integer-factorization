@@ -122,7 +122,13 @@ char* identifyZeros(char* num, char* nrev) {
 			rexp1[13] = '\0';
 			rexp2[13] = '\0';
 			int lastp1 = rexp1[10] - '0';
+			if (lastp1 == 0 )  {
+				lastp1 = rexp1[11] - '0';
+			}
 			int lastp2 = rexp2[10] - '0';
+			if (lastp2 == 0 )  {
+				lastp2 = rexp2[11] - '0';
+			}
 			int firstp1 = rexp1[0] - '0';
 			int firstp2 = rexp2[0] - '0';
 			int rz1 = lastp1*10 + firstp1;
@@ -332,7 +338,13 @@ char* identifyZeros(char* num, char* nrev) {
 			rexp1[13] = '\0';
 			rexp2[13] = '\0';
 			int lastp1 = rexp1[10] - '0';
+			if (lastp1 == 0 )  {
+				lastp1 = rexp1[11] - '0';
+			}
 			int lastp2 = rexp2[10] - '0';
+			if (lastp2 == 0 )  {
+				lastp2 = rexp2[11] - '0';
+			}
 			int firstp1 = rexp1[0] - '0';
 			int firstp2 = rexp2[0] - '0';
 			int rz1 = lastp1*10 + firstp1;
