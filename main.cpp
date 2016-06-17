@@ -64,6 +64,7 @@ char* identifyZeros(char* num, char* nrev) {
 		int rbe = botr*10 + botl;
 
 		if (_riemannExists(ce) && _riemannExists(be)) { //symmetry
+			cout << "\nSymmetry #1\n";
 			int p1 = _getPosRiemann(ce);
 			int p2 = _getPosRiemann(be);
 			const char* exp1 = riemann_exponents[p1 - 1];
@@ -107,7 +108,9 @@ char* identifyZeros(char* num, char* nrev) {
 			cout << "Truncated exp1:\t"<< rexp1 << "\n";
 			cout << "Truncated exp2:\t"<< rexp2 << "\n";
 			factor += boost::lexical_cast<std::string>(countPrimes(rexp1, rexp2));
-		} else if (_riemannExists(ce) && _riemannExists(rbe)) { //cross - symmetry
+		} 
+		if (_riemannExists(ce) && _riemannExists(rbe)) { //cross - symmetry
+			cout << "\nCross Symmetry #1\n";
 			int p1 = _getPosRiemann(ce);
 			int p2 = _getPosRiemann(rbe);
 			const char* exp1 = riemann_exponents[p1 - 1];
@@ -315,7 +318,9 @@ char* identifyZeros(char* num, char* nrev) {
 			cout << "Truncated _exp4:\t"<< _rexp4 << "\n";
 			cout << "Truncated exp3:\t"<< rexp3 << "\n";
 			cout << "Truncated exp4:\t"<< rexp4 << "\n";
-		} else if (_riemannExists(rce) && _riemannExists(be)) { //cross - symmetry
+		} 
+		if (_riemannExists(rce) && _riemannExists(be)) { //cross - symmetry
+			cout << "\nCross Symmetry #2\n";
 			int p1 = _getPosRiemann(rce);
 			int p2 = _getPosRiemann(be);
 			const char* exp1 = riemann_exponents[p1 - 1];
@@ -549,9 +554,11 @@ char* identifyZeros(char* num, char* nrev) {
 			cout << "Truncated _exp4:\t"<< _rexp4 << "\n";
 			cout << "Truncated exp3:\t"<< rexp3 << "\n";
 			cout << "Truncated exp4:\t"<< rexp4 << "\n";
-			
+
 			rexp3[12] =  rexp3[11] = '\0';
-		} else if (_riemannExists(rce) & _riemannExists(rbe)) { //symmetry
+		} 
+		if (_riemannExists(rce) & _riemannExists(rbe)) { //symmetry
+			cout << "\nSymmetry #2\n";
 			int p1 = _getPosRiemann(rce);
 			int p2 = _getPosRiemann(rbe);
 			const char* exp1 = riemann_exponents[p1 - 1];
