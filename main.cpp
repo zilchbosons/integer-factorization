@@ -102,6 +102,9 @@ int countPrimes(char* z1, char* z2, char* z3, char* z4, char* z5, char* z6) {
 		l = strlen(z6);
 		test.push_back(z6);
 	}
+	test.erase(
+			std::unique(test.begin(), test.end()),
+			test.end());
 	std::sort(test.begin(), test.end(), customLess);
 	int cnt = 0;
 	int zk[6];
@@ -236,8 +239,8 @@ char* identifyZeros(char* num, char* nrev) {
 				}
 			}
 			rexp2[12] = rexp2[11] =  '\0';
-			cout << "Truncated exp1:\t"<< rexp1 << "\n";
-			cout << "Truncated exp2:\t"<< rexp2 << "\n";
+//			cout << "Truncated exp1:\t"<< rexp1 << "\n";
+//			cout << "Truncated exp2:\t"<< rexp2 << "\n";
 			factor += boost::lexical_cast<std::string>(countPrimes(rexp1, rexp2));
 		} 
 		if (_riemannExists(ce) && _riemannExists(rbe)) { //cross - symmetry
@@ -445,16 +448,17 @@ char* identifyZeros(char* num, char* nrev) {
 					} 
 				}
 				rexp2[12] =  rexp2[11] = '\0';
-				cout << "Truncated exp1:\t"<< rexp1 << "\n";
-				cout << "Truncated exp2:\t"<< rexp2 << "\n";
+//				cout << "Truncated exp1:\t"<< rexp1 << "\n";
+//				cout << "Truncated exp2:\t"<< rexp2 << "\n";
 			}
 			factor += boost::lexical_cast<std::string>(countPrimes(rexp1, rexp2, rexp3, _rexp3, rexp4, _rexp4));
-			cout << "Truncated exp1:\t"<< rexp1 << "\n";
+/*			cout << "Truncated exp1:\t"<< rexp1 << "\n";
 			cout << "Truncated exp2:\t"<< rexp2 << "\n";
 			cout << "Truncated _exp3:\t"<< _rexp3 << "\n";
 			cout << "Truncated _exp4:\t"<< _rexp4 << "\n";
 			cout << "Truncated exp3:\t"<< rexp3 << "\n";
 			cout << "Truncated exp4:\t"<< rexp4 << "\n";
+*/
 		} 
 		if (_riemannExists(rce) && _riemannExists(be)) { //cross - symmetry
 			cout << "\nCross Symmetry #2\n";
@@ -687,17 +691,17 @@ char* identifyZeros(char* num, char* nrev) {
 					} 
 				}
 				rexp2[12] =  rexp2[11] = '\0';
-				cout << "Truncated exp1:\t"<< rexp1 << "\n";
-				cout << "Truncated exp2:\t"<< rexp2 << "\n";
+//				cout << "Truncated exp1:\t"<< rexp1 << "\n";
+//				cout << "Truncated exp2:\t"<< rexp2 << "\n";
 			}
 			factor += boost::lexical_cast<std::string>(countPrimes(rexp1, rexp2, rexp3, _rexp3, rexp4, _rexp4));
-			cout << "Truncated exp1:\t"<< rexp1 << "\n";
+/*			cout << "Truncated exp1:\t"<< rexp1 << "\n";
 			cout << "Truncated exp2:\t"<< rexp2 << "\n";
 			cout << "Truncated _exp3:\t"<< _rexp3 << "\n";
 			cout << "Truncated _exp4:\t"<< _rexp4 << "\n";
 			cout << "Truncated exp3:\t"<< rexp3 << "\n";
 			cout << "Truncated exp4:\t"<< rexp4 << "\n";
-
+*/
 			rexp3[12] =  rexp3[11] = '\0';
 		} 
 		if (_riemannExists(rce) & _riemannExists(rbe)) { //symmetry
@@ -741,8 +745,8 @@ char* identifyZeros(char* num, char* nrev) {
 				}
 			}
 			rexp2[12] =  rexp2[11] = '\0';
-			cout << "Truncated exp1:\t"<< rexp1 << "\n";
-			cout << "Truncated exp2:\t"<< rexp2 << "\n";
+//			cout << "Truncated exp1:\t"<< rexp1 << "\n";
+//			cout << "Truncated exp2:\t"<< rexp2 << "\n";
 			factor += boost::lexical_cast<std::string>(countPrimes(rexp1, rexp2));
 		} 
 	}
