@@ -6,6 +6,7 @@
 #include <math.h>
 #include <common.hpp>
 #include <vector>
+#include <algorithm>
 #include <boost/lexical_cast.hpp>
 
 using namespace boost;
@@ -41,16 +42,31 @@ int roundOff(int x, int y, int z, int& c) {
 	return x;
 }
 
+struct A {
+	bool operator()(char* a, char* b)
+	{   
+		return strcmp(a, b) < 0;
+	}   
+} customLess;
+
 int countPrimes(char* z1, char* z2) {
 	int l = strlen(z1);
 	int cnt = 0;
 	for (int i = 0; i < l ; ++i ) {
-		int z1k = z1[i] - '0';
-		int z2k = z2[i] - '0';
+		int z1k = ((strlen(z1)==0)? -1:(z1[i] - '0'));
+		int z2k = ((strlen(z2)==0)? -1:(z2[i] - '0'));
 
-		int ce = z1k*10 + z2k;
-		int rce = z2k*10 + z1k;
-
+		int ce = 0, rce = 0;
+		if (z1k == -1) {
+			ce = z2k;
+			rce = z2k;
+		} else if (z2k == -1) {
+			ce = z1k;
+			rce = z1k;
+		} else {
+			ce = z1k*10 + z2k;
+			rce = z2k*10 + z1k;
+		}
 		if (isPrime(ce) || isPrime(rce) ) {
 			++cnt;
 		} 
@@ -59,24 +75,109 @@ int countPrimes(char* z1, char* z2) {
 	return 0;
 }
 
-int countPrimes(char* z1, char* z2, char* z3, char* z4) {
-	vector<char*> test;
-	test.push_back(z1);
-	test.push_back(z2);
-	test.push_back(z3);
-	test.push_back(z4);
-	int l = strlen(z1);
-	std::sort(test.begin(), test.end());
-	int cnt = 0, lcnt = 0;
-	for (int i = 0; i < l; ++i ) {
-
-		std::rotate(test.begin(), test.begin()+1, test.end());
-	} 
-	cout << "\n 4-way Primes: \t"<<cnt<<"\n";
-	return 0;
-}
-
 int countPrimes(char* z1, char* z2, char* z3, char* z4, char* z5, char* z6) {
+	vector<char*> test;
+	int l = 0;
+	if (strlen(z1)>0) {
+		l = strlen(z1);
+		test.push_back(z1);
+	}
+	if (strlen(z2) > 0) {
+		l = strlen(z2);
+		test.push_back(z2);
+	}
+	if (strlen(z3) > 0) {
+		l = strlen(z3);
+		test.push_back(z3);
+	}
+	if (strlen(z4) > 0) {
+		l = strlen(z4);
+		test.push_back(z4);
+	}
+	if (strlen(z5) > 0) {
+		l = strlen(z5);
+		test.push_back(z5);
+	}
+	if (strlen(z6) > 0) {
+		l = strlen(z6);
+		test.push_back(z6);
+	}
+	std::sort(test.begin(), test.end(), customLess);
+	int cnt = 0;
+	int zk[6];
+	for (int j = 0; j < test.size() ; ++j) {
+		cnt = 0;
+		for (int i = 0; i < l; ++i ) {
+			zk[0] = zk[1] = zk[2] = zk[3] = zk[4] = zk[5] = -1;
+			if (test.size() > 0) {
+				zk[0] = test[0][i] - '0';
+			}
+			if (test.size() > 1) {
+				zk[1] = test[1][i] - '0';
+			}
+			if (test.size() > 2) {
+				zk[2] = test[2][i] - '0';
+			}
+			if (test.size() > 3) {
+				zk[3] = test[3][i] - '0';
+			}
+			if (test.size() > 4) {
+				zk[4] = test[4][i] - '0';
+			}
+			if (test.size() > 5) {
+				zk[5] = test[5][i] - '0';
+			}
+			int ce = 0, rce = 0;
+			ce = zk[0]*10 + zk[1];
+			rce = zk[1]*10 + zk[0];
+			if (isPrime(ce) || isPrime(rce)) {
+				if (zk[2] > -1) {
+					ce = zk[1]*10 + zk[2];
+					rce = zk[2]*10 + zk[1];
+					if (isPrime(ce) || isPrime(rce)) {
+						if (zk[3] > -1) {
+							ce = zk[2]*10 + zk[3];
+							rce = zk[3]*10 + zk[2];
+							if (isPrime(ce) || isPrime(rce)) {
+								if (zk[4] > -1) {
+									ce = zk[3] *10 + zk[4];
+									rce = zk[4]*10 + zk[3];
+									if (isPrime(ce) || isPrime(rce)) {
+										if (zk[5] > -1) {
+											ce = zk[4]*10 + zk[5];
+											rce = zk[5]*10 + zk[4];
+											if (isPrime(ce) || isPrime(rce)) {
+												++cnt;
+											}
+										} else {
+											if (test.size()==5) {
+												++cnt;
+											}
+										}
+									}
+								} else {
+									if (test.size()==4) {
+										++cnt;
+									}
+								}
+							}
+						} else {
+							if (test.size()==3) {
+								++cnt;
+							}
+						}
+					}
+				} else {
+					if (test.size()==2) {
+						++cnt;
+					}
+				}
+			}
+		} 
+		cout << "\n @Rotation: \t"<<j<<"\t6-way Primes:\t"<<cnt<<"\n";
+		std::rotate(test.begin(), test.begin()+1, test.end());
+	}
+	return 0;
 }
 
 char* identifyZeros(char* num, char* nrev) {
