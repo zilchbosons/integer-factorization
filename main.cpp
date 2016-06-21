@@ -72,118 +72,11 @@ int countPrimes(char* z1, char* z2) {
 		} 
 	}
 	cout << "\n 2-way Primes: \t"<<cnt<<"\n";
-	return 0;
+	return cnt;
 }
 
-int countPrimes(char* z1, char* z2, char* z3, char* z4, char* z5, char* z6) {
-	vector<char*> test;
-	int l = 0;
-	if (strlen(z1)>0) {
-		l = strlen(z1);
-		test.push_back(z1);
-	}
-	if (strlen(z2) > 0) {
-		l = strlen(z2);
-		test.push_back(z2);
-	}
-	if (strlen(z3) > 0) {
-		l = strlen(z3);
-		test.push_back(z3);
-	}
-	if (strlen(z4) > 0) {
-		l = strlen(z4);
-		test.push_back(z4);
-	}
-	if (strlen(z5) > 0) {
-		l = strlen(z5);
-		test.push_back(z5);
-	}
-	if (strlen(z6) > 0) {
-		l = strlen(z6);
-		test.push_back(z6);
-	}
-	test.erase(
-			std::unique(test.begin(), test.end()),
-			test.end());
-	std::sort(test.begin(), test.end(), customLess);
-	int cnt = 0;
-	int zk[6];
-	for (int j = 0; j < test.size() ; ++j) {
-		cnt = 0;
-		for (int i = 0; i < l; ++i ) {
-			zk[0] = zk[1] = zk[2] = zk[3] = zk[4] = zk[5] = -1;
-			if (test.size() > 0) {
-				zk[0] = test[0][i] - '0';
-			}
-			if (test.size() > 1) {
-				zk[1] = test[1][i] - '0';
-			}
-			if (test.size() > 2) {
-				zk[2] = test[2][i] - '0';
-			}
-			if (test.size() > 3) {
-				zk[3] = test[3][i] - '0';
-			}
-			if (test.size() > 4) {
-				zk[4] = test[4][i] - '0';
-			}
-			if (test.size() > 5) {
-				zk[5] = test[5][i] - '0';
-			}
-			int ce = 0, rce = 0;
-			ce = zk[0]*10 + zk[1];
-			rce = zk[1]*10 + zk[0];
-			if (isPrime(ce) || isPrime(rce)) {
-				if (zk[2] > -1) {
-					ce = zk[1]*10 + zk[2];
-					rce = zk[2]*10 + zk[1];
-					if (isPrime(ce) || isPrime(rce)) {
-						if (zk[3] > -1) {
-							ce = zk[2]*10 + zk[3];
-							rce = zk[3]*10 + zk[2];
-							if (isPrime(ce) || isPrime(rce)) {
-								if (zk[4] > -1) {
-									ce = zk[3] *10 + zk[4];
-									rce = zk[4]*10 + zk[3];
-									if (isPrime(ce) || isPrime(rce)) {
-										if (zk[5] > -1) {
-											ce = zk[4]*10 + zk[5];
-											rce = zk[5]*10 + zk[4];
-											if (isPrime(ce) || isPrime(rce)) {
-												++cnt;
-											}
-										} else {
-											if (test.size()==5) {
-												++cnt;
-											}
-										}
-									}
-								} else {
-									if (test.size()==4) {
-										++cnt;
-									}
-								}
-							}
-						} else {
-							if (test.size()==3) {
-								++cnt;
-							}
-						}
-					}
-				} else {
-					if (test.size()==2) {
-						++cnt;
-					}
-				}
-			}
-		} 
-		cout << "\n @Rotation: \t"<<j<<"\t6-way Primes:\t"<<cnt<<"\n";
-		std::rotate(test.begin(), test.begin()+1, test.end());
-	}
-	return 0;
-}
-
-char* identifyZeros(char* num, char* nrev) {
+Node* identifyZeros(char* num, char* nrev) {
+	Node* head = 0, *tmp = 0;
 	int l = strlen(num);
 	std::string factor = "";
 	for (int i = 0; i < l-1; ++i) { 
@@ -239,9 +132,36 @@ char* identifyZeros(char* num, char* nrev) {
 				}
 			}
 			rexp2[12] = rexp2[11] =  '\0';
-//			cout << "Truncated exp1:\t"<< rexp1 << "\n";
-//			cout << "Truncated exp2:\t"<< rexp2 << "\n";
-			factor += boost::lexical_cast<std::string>(countPrimes(rexp1, rexp2));
+			//			cout << "Truncated exp1:\t"<< rexp1 << "\n";
+			//			cout << "Truncated exp2:\t"<< rexp2 << "\n";
+
+			int count = countPrimes(rexp1, rexp2);                        
+			if (!head) {
+				head = new Node();
+				head->next = 0;
+				int* v = head->triplets = new int[3];
+				v[1] = count;
+				v[0] = num[i]-'0';
+				if (i % 2 == 0) {
+					v[2] = pi[i]-'0'; 
+				} else {
+					v[2] = e[i] - '0';
+				}
+				tmp = head;
+			} else {
+				Node* t = new Node();
+				t->next = 0;
+				tmp->next = t;
+				tmp = t;
+				int* v = t->triplets = new int[3];
+				v[1] = count;
+				v[0] = num[i]-'0';
+				if (i % 2 == 0) {
+					v[2] = pi[i]-'0'; 
+				} else {
+					v[2] = e[i] - '0';
+				}
+			}
 		} 
 		if (_riemannExists(ce) && _riemannExists(rbe)) { //cross - symmetry
 			cout << "\nCross Symmetry #1\n";
@@ -285,9 +205,35 @@ char* identifyZeros(char* num, char* nrev) {
 				}
 			}
 			rexp2[12] = rexp2[11] =  '\0';
-//			cout << "Truncated exp1:\t"<< rexp1 << "\n";
-//			cout << "Truncated exp2:\t"<< rexp2 << "\n";
-			factor += boost::lexical_cast<std::string>(countPrimes(rexp1, rexp2));
+			//			cout << "Truncated exp1:\t"<< rexp1 << "\n";
+			//			cout << "Truncated exp2:\t"<< rexp2 << "\n";
+			int count = countPrimes(rexp1, rexp2);                        
+			if (!head) {
+				head = new Node();
+				head->next = 0;
+				int* v = head->triplets = new int[3];
+				v[1] = count;
+				v[0] = num[l-1-i]-'0';
+				if (i % 2 == 0) {
+					v[2] = pi[l-1-i]-'0'; 
+				} else {
+					v[2] = e[l-1-i] - '0';
+				}
+				tmp = head;
+			} else {
+				Node* t = new Node();
+				t->next = 0;
+				tmp->next = t;
+				tmp = t;
+				int* v = t->triplets = new int[3];
+				v[1] = count;
+				v[0] = num[l-1-i]-'0';
+				if (i % 2 == 0) {
+					v[2] = pi[l-1-i]-'0'; 
+				} else {
+					v[2] = e[l-1-i] - '0';
+				}
+			}
 		} 
 		if (_riemannExists(rce) && _riemannExists(be)) { //cross - symmetry
 			cout << "\nCross Symmetry #2\n";
@@ -331,9 +277,35 @@ char* identifyZeros(char* num, char* nrev) {
 				}
 			}
 			rexp2[12] = rexp2[11] =  '\0';
-//			cout << "Truncated exp1:\t"<< rexp1 << "\n";
-//			cout << "Truncated exp2:\t"<< rexp2 << "\n";
-			factor += boost::lexical_cast<std::string>(countPrimes(rexp1, rexp2));
+			//			cout << "Truncated exp1:\t"<< rexp1 << "\n";
+			//			cout << "Truncated exp2:\t"<< rexp2 << "\n";
+			int count = countPrimes(rexp1, rexp2);                        
+			if (!head) {
+				head = new Node();
+				head->next = 0;
+				int* v = head->triplets = new int[3];
+				v[1] = count;
+				v[0] = num[l-1-i]-'0';
+				if (i % 2 == 0) {
+					v[2] = pi[l-1-i]-'0'; 
+				} else {
+					v[2] = e[l-1-i] - '0';
+				}
+				tmp = head;
+			} else {
+				Node* t = new Node();
+				t->next = 0;
+				tmp->next = t;
+				tmp = t;
+				int* v = t->triplets = new int[3];
+				v[1] = count;
+				v[0] = num[l-1-i]-'0';
+				if (i % 2 == 0) {
+					v[2] = pi[l-1-i]-'0'; 
+				} else {
+					v[2] = e[l-1-i] - '0';
+				}
+			}
 		} 
 		if (_riemannExists(rce) & _riemannExists(rbe)) { //symmetry
 			cout << "\nSymmetry #2\n";
@@ -376,12 +348,41 @@ char* identifyZeros(char* num, char* nrev) {
 				}
 			}
 			rexp2[12] =  rexp2[11] = '\0';
-//			cout << "Truncated exp1:\t"<< rexp1 << "\n";
-//			cout << "Truncated exp2:\t"<< rexp2 << "\n";
-			factor += boost::lexical_cast<std::string>(countPrimes(rexp1, rexp2));
+			//			cout << "Truncated exp1:\t"<< rexp1 << "\n";
+			//			cout << "Truncated exp2:\t"<< rexp2 << "\n";
+			int count = countPrimes(rexp1, rexp2);                        
+			if (!head) {
+				head = new Node();
+				head->next = 0;
+				int* v = head->triplets = new int[3];
+				v[1] = count;
+				v[0] = num[i]-'0';
+				if (i % 2 == 0) {
+					v[2] = pi[i]-'0'; 
+				} else {
+					v[2] = e[i] - '0';
+				}
+				tmp = head;
+			} else {
+				Node* t = new Node();
+				t->next = 0;
+				tmp->next = t;
+				tmp = t;
+				int* v = t->triplets = new int[3];
+				v[1] = count;
+				v[0] = num[i]-'0';
+				if (i % 2 == 0) {
+					v[2] = pi[i]-'0'; 
+				} else {
+					v[2] = e[i] - '0';
+				}
+			}
 		} 
 	}
-	return strdup((char*) factor.c_str());
+	return head;
+}
+
+char* analyze(Node* head) {
 }
 
 char* factorize(char* num) {
@@ -390,10 +391,11 @@ char* factorize(char* num) {
 	std::string factor = "";
 	for (int i = 0; i < ceil(l / 2.0); ++i) {
 		cout <<"\nIteration #\t"<< i + 1 <<"\n";
-		factor += identifyZeros(num, nrev); 
+		Node* head = identifyZeros(num, nrev); 
 		cout << "Number stack is :\n";
 		cout << num <<"\n";
 		cout << nrev <<"\n";
+                factor += analyze(head);
 		rotateLeft(nrev);
 	}
 	return strdup((char*) factor.c_str());
