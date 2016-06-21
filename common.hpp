@@ -41,26 +41,6 @@ int reachability[10][10] = {
 	{ 1,	1,	1,	1,	0,	1,	0,	0,	1,	1 }
 };
 
-struct Node {
-	Node* next;
-	Node* prev;
-	Node() {
-		next = prev = 0;
-	}
-};
-
-struct pi_node : public Node {
-	int pi_data;
-};
-
-struct e_node: public Node {
-	int e_data;
-};
-
-struct op_node: public Node {
-	int op; //0: multiply, 1: add, 2: subtract, 3: exponentiation
-};
-
 int riemann_zeros[30] = { 14, 21, 25, 30, 32, 37, 40, 43, 48, 49, 52, 56, 59,
 	60, 65, 67, 69, 72, 75, 77, 79, 82, 84, 87, 88, 92, 94, 95, 98, 0 };
 
@@ -255,5 +235,20 @@ bool isPrime(int x) {
 	}
 	return false;
 }
+
+struct Node {
+	vector<int*>* triplets;
+	Node* next;
+	Node() {
+		triplets = 0;
+		next = 0;
+	}
+};
+
+struct SymNode : public Node {
+};
+
+struct AntiSymNode : public Node {
+};
 
 #endif
