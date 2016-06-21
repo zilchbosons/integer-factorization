@@ -243,9 +243,11 @@ bool isPrime(int x) {
 struct Node {
 	int* triplets;
 	Node* next;
+	short int type;
 	Node() {
 		triplets = 0;
 		next = 0;
+		type = 0; //Sym node
 	}
 };
 

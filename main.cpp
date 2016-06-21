@@ -148,6 +148,7 @@ Node* identifyZeros(char* num, char* nrev) {
 					v[2] = e[i] - '0';
 				}
 				tmp = head;
+				head->type = 0;
 			} else {
 				Node* t = new Node();
 				t->next = 0;
@@ -161,6 +162,7 @@ Node* identifyZeros(char* num, char* nrev) {
 				} else {
 					v[2] = e[i] - '0';
 				}
+				t->type = 0;
 			}
 		} 
 		if (_riemannExists(ce) && _riemannExists(rbe)) { //cross - symmetry
@@ -220,6 +222,7 @@ Node* identifyZeros(char* num, char* nrev) {
 					v[2] = e[l-1-i] - '0';
 				}
 				tmp = head;
+				head->type = 1;
 			} else {
 				Node* t = new Node();
 				t->next = 0;
@@ -233,6 +236,7 @@ Node* identifyZeros(char* num, char* nrev) {
 				} else {
 					v[2] = e[l-1-i] - '0';
 				}
+				t->type = 1;
 			}
 		} 
 		if (_riemannExists(rce) && _riemannExists(be)) { //cross - symmetry
@@ -292,6 +296,7 @@ Node* identifyZeros(char* num, char* nrev) {
 					v[2] = e[l-1-i] - '0';
 				}
 				tmp = head;
+				head->type = 1;
 			} else {
 				Node* t = new Node();
 				t->next = 0;
@@ -305,6 +310,7 @@ Node* identifyZeros(char* num, char* nrev) {
 				} else {
 					v[2] = e[l-1-i] - '0';
 				}
+				t->type = 1;
 			}
 		} 
 		if (_riemannExists(rce) & _riemannExists(rbe)) { //symmetry
@@ -363,6 +369,7 @@ Node* identifyZeros(char* num, char* nrev) {
 					v[2] = e[i] - '0';
 				}
 				tmp = head;
+				head->type = 0;
 			} else {
 				Node* t = new Node();
 				t->next = 0;
@@ -376,6 +383,7 @@ Node* identifyZeros(char* num, char* nrev) {
 				} else {
 					v[2] = e[i] - '0';
 				}
+				t->type = 0;
 			}
 		} 
 	}
@@ -383,6 +391,10 @@ Node* identifyZeros(char* num, char* nrev) {
 }
 
 char* analyze(Node* head) {
+	Node* tmp = head;
+	while (tmp) {
+		tmp = tmp->next;
+	}
 }
 
 char* factorize(char* num) {
@@ -395,7 +407,7 @@ char* factorize(char* num) {
 		cout << "Number stack is :\n";
 		cout << num <<"\n";
 		cout << nrev <<"\n";
-                factor += analyze(head);
+		factor += analyze(head);
 		rotateLeft(nrev);
 	}
 	return strdup((char*) factor.c_str());
